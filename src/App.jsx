@@ -22,14 +22,36 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <h1>Hello World</h1>
-        <button onClick={this.fetchData}>Get some</button>
-        <img src={this.state.data[0].url} alt="cat" />
+
+        <div className="container">
+
+          <h1>Cat market</h1>
+
+          <img src={this.state.data[0].url} alt="cat" />
+          <h3>PRICE</h3>
+          <p>Name and age</p>
+          <button onClick={this.fetchData}>£50</button>
+          <img src={this.state.data[1].url} alt="cat" />
+          <h3>PRICE</h3>
+          <p>Name and age</p>
+          <button onClick={this.fetchData}>£150</button>
+          <img src={this.state.data[2].url} alt="cat" />
+          <h3>PRICE</h3>
+          <p>Name and age</p>
+          <button onClick={this.fetchData}>£25</button>
+          <img src={this.state.data[3].url} alt="cat" />
+          <h3>PRICE</h3>
+          <p>Name and age</p>
+          <button onClick={this.fetchData}>£100</button>
+        </div>
+
+        <button onClick={this.fetchData}>Basket</button>
+        
       </div>
     );
   }
 }
-/* Random comment for test commit */
+
 const Error = () => {
   <div>
     <h1>error</h1>
