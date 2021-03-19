@@ -28,7 +28,7 @@ function App() {
         </button>
 
         <button onClick={() => navigateTo(PAGE_PRODUCTS)}>
-          Products
+          Shop
           <img src={shopLogo} alt="shop-logo" className="photo" />
         </button>
       </header>

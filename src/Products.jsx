@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import faker from "faker";
-
-const CAT = "Cats";
 
 export default function Products({ setCart, cart }) {
   const [products, setProducts] = useState([]);
@@ -17,12 +15,15 @@ export default function Products({ setCart, cart }) {
         setProducts(data);
       });
   };
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const addToCart = (product) => {
     let newCart = [...cart];
     let itemInCart = newCart.find((item) => product.name === item.name);
     if (itemInCart) {
-      itemInCart.quantity++;
+      alert("Item is already in cart!");
     } else {
       itemInCart = {
         ...product,
@@ -35,8 +36,7 @@ export default function Products({ setCart, cart }) {
 
   return (
     <>
-      <h1>Products</h1>
-      <button onClick={fetchData}>Reveal Products </button>
+      <h1>Kittens and Cats for sale</h1>
 
       <div className="products">
         {products.map((product, index) => (
