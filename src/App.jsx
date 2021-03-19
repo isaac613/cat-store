@@ -37,5 +37,8 @@ function App() {
     </div>
   );
 }
+//test comment
+
+/* Random comment for test commit */
 
 export default App;
