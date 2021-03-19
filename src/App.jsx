@@ -1,38 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import Products from "./Products";
+import Cart from "./Cart";
+import basketLogo from "./components/shopping-cart.png";
+import shopLogo from "./components/shop.png";
+const PAGE_PRODUCTS = "products";
+const PAGE_CART = "cart";
 
-class App extends React.Component {
-  state = {
-    data: [],
-    isLoading: true,
+function App() {
+  const [cart, setCart] = useState([]);
+  const [page, setPage] = useState(PAGE_PRODUCTS);
+
+  const navigateTo = (nextPage) => {
+    setPage(nextPage);
   };
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData = () => {
-    fetch("https://api.thecatapi.com/v1/images/search?limit=10")
-      .then((response) => response.json())
-      .then((data) => this.setState({ data: data, isLoading: false }));
+  const getCartTotal = () => {
+    return cart.reduce((sum, { quantity }) => sum + quantity, 0);
   };
-  render() {
-    if (this.state.data.error) return <Error />;
-    if (this.state.isLoading) return <h1>Loading</h1>;
 
-    return (
-      <div className="App">
-        <h1>Hello World</h1>
-        <button onClick={this.fetchData}>Get some</button>
-        <img src={this.state.data[0].url} alt="cat" />
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      <header>
+        <button onClick={() => navigateTo(PAGE_CART)}>
+          Basket <img src={basketLogo} alt="basket-logo" className="photo" /> (
+          {getCartTotal()})
+        </button>
+
+        <button onClick={() => navigateTo(PAGE_PRODUCTS)}>
+          Products
+          <img src={shopLogo} alt="shop-logo" className="photo" />
+        </button>
+      </header>
+      {page === PAGE_PRODUCTS && <Products cart={cart} setCart={setCart} />}
+      {page === PAGE_CART && <Cart cart={cart} setCart={setCart} />}
+    </div>
+  );
 }
 
-const Error = () => {
-  <div>
-    <h1>error</h1>
-  </div>;
-};
 export default App;
