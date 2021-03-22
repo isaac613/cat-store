@@ -18,7 +18,7 @@ export default function Cart({ cart, setCart }) {
 
       <div className="products">
         {cart.map((product, index) => (
-          <div className="product" key={index}>
+          <div className="product cat-product" key={index}>
             <h3>{product.name}</h3>
             <h4>£{product.cost}</h4>
 

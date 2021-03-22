@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import faker from "faker";
+import { Modal } from "./Modal.js";
 
 export default function Products({ setCart, cart }) {
   const [products, setProducts] = useState([]);
@@ -33,18 +34,30 @@ export default function Products({ setCart, cart }) {
     }
     setCart(newCart);
   };
+  const [show, setShow] = useState(false);
 
+  const closeModalHandler = () => setShow(false);
   return (
     <>
       <h1>Kittens and Cats for sale</h1>
-
+      <div>
+        {show ? (
+          <div onClick={closeModalHandler} className="back-drop"></div>
+        ) : null}
+        <button onClick={() => setShow(true)} className="btn-openModal">
+          Basket
+        </button>
+        <Modal show={show} close={closeModalHandler} />
+      </div>
       <div className="products">
         {products.map((product, index) => (
           <div className="product" key={index}>
-            <h3>{product.name}</h3>
-            <h4>£{product.cost}</h4>
-            <img src={product.url} />
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
+            <div className="cat-product">
+              <h3>{product.name}</h3>
+              <h4>£{product.cost}</h4>
+              <img src={product.url} />
+              <button onClick={() => addToCart(product)}>Add to Cart</button>
+            </div>
           </div>
         ))}
       </div>
